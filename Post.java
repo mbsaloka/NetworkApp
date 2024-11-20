@@ -6,6 +6,7 @@ public class Post {
     private String timestamp;
     private User author;
     private Set<User> likes;
+    private Set<Comment> comments;  // Menambahkan set komentar
 
     // Konstruktor
     public Post(String content, User author, String timestamp) {
@@ -13,6 +14,7 @@ public class Post {
         this.timestamp = timestamp;
         this.author = author;
         this.likes = new HashSet<>();
+        this.comments = new HashSet<>();
     }
 
     // Getter dan Setter
@@ -49,10 +51,23 @@ public class Post {
         likes.remove(user);
     }
 
+    // Menambah komentar
+    public void addComment(Comment comment) {
+        comments.add(comment);
+    }
+
+    public void removeComment(Comment comment) {
+        comments.remove(comment);
+    }
+
     // Menampilkan informasi postingan
     public void viewPost() {
         System.out.println("Post by " + author.getName() + " on " + timestamp);
         System.out.println("Content: " + content);
         System.out.println("Likes: " + likes.size());
+        System.out.println("Comments: ");
+        for (Comment comment : comments) {
+            comment.viewComment();
+        }
     }
 }
